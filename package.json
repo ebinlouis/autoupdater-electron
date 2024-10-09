@@ -1,0 +1,35 @@
+{
+    "name": "my-electron-app",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
+    },
+    "repository": "https://github.com/cyrilgupta/electron-autoupdater",
+    "publish": {
+        "provider": "github",
+        "releaseType": "release"
+    },
+    "build": {
+        "appId": "com.ebin.autoupdater",
+        "productName": "Autoupdater App",
+        "win": {
+            "target": "nsis"
+        },
+        "directories": {
+            "output": "dist"
+        }
+    },
+    "keywords": [],
+    "author": "AutoUpdater",
+    "license": "ISC",
+    "description": "My Test Electron App",
+    "devDependencies": {
+        "electron": "^32.1.2"
+    },
+    "dependencies": {
+        "electron-builder": "^25.1.7",
+        "electron-updater": "^6.3.9"
+    }
+}
