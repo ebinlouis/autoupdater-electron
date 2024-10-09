@@ -28,9 +28,7 @@
     "description": "My Test Electron App",
     "devDependencies": {
         "electron": "^32.1.2",
+        "electron-builder": "^25.1.7",
         "electron-updater": "^6.3.9"
-    },
-    "dependencies": {
-        "electron-builder": "^25.1.7"
     }
 }
