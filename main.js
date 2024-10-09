@@ -1,10 +1,10 @@
 const { app, BrowserWindow, dialog } = require('electron');
 const path = require('path');
-const { autoUpdater, AppUpdater } = require('electron-updater');
+const { autoUpdater } = require('electron-updater');
 
 // Basic Flags
-autoUpdater.autoDownload = false;
-autoUpdater.autoInstallOnAppQuit = true;
+autoUpdater.autoDownload = false; // No auto-download; we'll handle it manually
+autoUpdater.autoInstallOnAppQuit = true; // Automatically install on quit after downloading
 
 // Create the browser window
 function createWindow() {
@@ -12,21 +12,12 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'), // Optional
+            preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: true,
         },
     });
 
     win.loadFile('index.html'); // Load the HTML file
-
-    // win.once('ready-to-show', () => {
-    //     dialog.showMessageBox(win, {
-    //         type: 'info',
-    //         title: 'Alert from Main Process',
-    //         message: `Current Version is ${app.getVersion()}`,
-    //         buttons: ['OK'],
-    //     });
-    // });
 }
 
 // This method will be called when Electron has finished initialization
@@ -38,11 +29,11 @@ app.whenReady().then(() => {
     console.log(`Current Version is ${app.getVersion()}`);
 
     app.on('activate', () => {
-        // On macOS, recreate a window when the app is reactivated
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
 });
 
+// Event: Update available
 autoUpdater.on('update-available', (info) => {
     dialog
         .showMessageBox({
@@ -81,6 +72,17 @@ autoUpdater.on('update-downloaded', (info) => {
         .then(() => {
             autoUpdater.quitAndInstall(); // Restart the app to install the update
         });
+});
+
+// Event: Download progress
+autoUpdater.on('download-progress', (progressInfo) => {
+    console.log(
+        `Download speed: ${progressInfo.bytesPerSecond} bytes per second`
+    );
+    console.log(`Downloaded ${progressInfo.percent.toFixed(2)}%`);
+    console.log(
+        `(${progressInfo.transferred}/${progressInfo.total}) bytes downloaded`
+    );
 });
 
 // Event: Error
