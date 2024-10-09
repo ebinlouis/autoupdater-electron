@@ -19,14 +19,14 @@ function createWindow() {
 
     win.loadFile('index.html'); // Load the HTML file
 
-    win.once('ready-to-show', () => {
-        dialog.showMessageBox(win, {
-            type: 'info',
-            title: 'Alert from Main Process',
-            message: `Current Version is ${app.getVersion()}`,
-            buttons: ['OK'],
-        });
-    });
+    // win.once('ready-to-show', () => {
+    //     dialog.showMessageBox(win, {
+    //         type: 'info',
+    //         title: 'Alert from Main Process',
+    //         message: `Current Version is ${app.getVersion()}`,
+    //         buttons: ['OK'],
+    //     });
+    // });
 }
 
 // This method will be called when Electron has finished initialization
