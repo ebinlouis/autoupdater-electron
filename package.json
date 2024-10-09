@@ -4,9 +4,10 @@
     "main": "main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "electron ."
+        "start": "electron .",
+        "dist": "electron-builder"
     },
-    "repository": "https://github.com/cyrilgupta/electron-autoupdater",
+    "repository": "https://github.com/ebinlouis/autoupdater-electron",
     "publish": {
         "provider": "github",
         "releaseType": "release"
@@ -26,10 +27,10 @@
     "license": "ISC",
     "description": "My Test Electron App",
     "devDependencies": {
-        "electron": "^32.1.2"
+        "electron": "^32.1.2",
+        "electron-updater": "^6.3.9"
     },
     "dependencies": {
-        "electron-builder": "^25.1.7",
-        "electron-updater": "^6.3.9"
+        "electron-builder": "^25.1.7"
     }
 }
