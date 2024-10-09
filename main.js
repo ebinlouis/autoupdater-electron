@@ -44,12 +44,19 @@ app.whenReady().then(() => {
 });
 
 autoUpdater.on('update-available', (info) => {
-    dialog.showMessageBox({
-        type: 'info',
-        title: 'Update Available',
-        message: `A new update is available. Version ${info.version} will be downloaded in the background.`,
-        buttons: ['OK'],
-    });
+    dialog
+        .showMessageBox({
+            type: 'info',
+            title: 'Update Available',
+            message: `A new update is available. Version ${info.version} is ready. Do you want to download it now?`,
+            buttons: ['Yes', 'No'],
+        })
+        .then((result) => {
+            if (result.response === 0) {
+                // If 'Yes' is clicked
+                autoUpdater.downloadUpdate(); // Start the download manually
+            }
+        });
 });
 
 // Event: Update not available
